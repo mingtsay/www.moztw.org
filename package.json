@@ -4,6 +4,7 @@
   "description": "Mozilla Taiwan community web site",
   "main": "index.html",
   "scripts": {
+    "build": "node build.js",
     "start": "browser-sync start --config bs-config.js"
   },
   "repository": {
