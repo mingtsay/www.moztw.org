@@ -2,6 +2,34 @@
 
 This is the git repository of moztw.org web sites, including static pages. Feel free to fork, modify, and send pull request to us.
 
+## ⚠️ Do not enable "Enforce HTTPS" on GitHub Pages
+
+The GitHub Pages setting **Enforce HTTPS must stay disabled** for this repository.
+
+One of the reasons this site exists is to let people whose computer has no modern
+browser download Mozilla Firefox. In practice that means users still running
+Internet Explorer 6 on Windows XP.
+
+* moztw.org is served by GitHub Pages behind a `*.github.io` certificate, so HTTPS
+  on the custom domain requires SNI.
+* IE 6 on Windows XP does not support SNI and fails during the TLS handshake.
+* With "Enforce HTTPS" turned on, every plain HTTP request is redirected to HTTPS
+  and those users cannot reach the site at all. This is not a styling glitch — the
+  whole site becomes unreachable for exactly the audience it is meant to serve.
+
+For the same reason, the IE compatibility code in this repository is kept
+**deliberately** and should not be removed as dead weight:
+
+* `js/library/IE9.js`
+* `js/library/html5shiv/`
+* `js/library/iepngfix/`
+* `inc/dlfx_ie.shtml` — serves `download.mozilla.org` links over `http` to IE 6/7,
+  which cannot negotiate TLS with it
+* the `<!--[if IE 6]>` conditional comments on individual pages
+
+See [#799](https://github.com/moztw/www.moztw.org/issues/799) and
+[#800](https://github.com/moztw/www.moztw.org/issues/800) for the background.
+
 ## Repo structure
 
 moztw.org website contains sections from the following different sub-domain-based repos,
